@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دنیای مخصوص سما ❤️</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  background:radial-gradient(circle at top,#39234b,#100d1b 65%,#080710);
+  color:#fff;
+  font-family:Tahoma,sans-serif;
+  text-align:center;
+  overflow-x:hidden;
+}
+canvas{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:5;
+}
+.container{
+  position:relative;
+  z-index:2;
+  padding:65px 22px 45px;
+  max-width:650px;
+  margin:auto;
+}
+.heart{
+  font-size:65px;
+  animation:pulse 1.3s infinite;
+}
+h1{
+  color:#ffdc91;
+  font-size:27px;
+  line-height:1.9;
+  text-shadow:0 0 20px #ffbd55;
+}
+.message{
+  margin-top:25px;
+  padding:27px 21px;
+  background:#ffffff10;
+  border:1px solid #e9c47780;
+  border-radius:24px;
+  box-shadow:0 0 35px #d99c4420;
+  line-height:2.5;
+  font-size:16px;
+  text-align:right;
+  white-space:pre-line;
+}
+button{
+  margin-top:28px;
+  border:1px solid #ffe0a0;
+  background:linear-gradient(120deg,#a96c25,#f5d28a,#a96c25);
+  color:#241326;
+  border-radius:35px;
+  padding:15px 30px;
+  font-size:17px;
+  font-weight:bold;
+}
+footer{
+  margin-top:35px;
+  color:#f4d99b;
+  font-size:14px;
+}
+@keyframes pulse{
+  50%{transform:scale(1.18);filter:drop-shadow(0 0 18px pink)}
+}
+</style>
+</head>
+
+<body>
+<canvas id="confetti"></canvas>
+
+<div class="container">
+  <div class="heart">❤️</div>
+
+  <h1>به دنیایی خوش آمدی که تمامش به نام توست...</h1>
+
+  <div class="message" id="message">
+سما جانم...
+
+اینجا هیچ‌چیز اتفاقی نیست؛
+هر کلمه با فکر تو نوشته شده،
+هر خاطره با یاد تو زنده شده
+و پشت تک‌تک این دکمه‌ها، ذره‌ای از احساسی پنهان شده که شاید هیچ‌وقت نتوانم تمامش را با کلمات بیان کنم...
+
+این دنیا را ساختم تا برای چند لحظه هم که شده،
+از میان تمام شلوغی‌های دنیا،
+فقط خودت باشی و لبخند قشنگت...
+
+پس بیا و در این دنیای کوچک قدم بزن؛
+دنیایی که در هر گوشه‌اش تکه‌ای از قلبم را برایت گذاشته‌ام...
+شاید بعضی حرف‌ها را بارها شنیده باشی،
+اما این بار می‌خواهم آن‌ها را از میان خاطره‌ها، لحظه‌ها و سورپرایزها دوباره زندگی کنی...
+
+هر دری را که باز کنی، چیزی از دوست داشتنم را پیدا می‌کنی؛
+و در پایان این مسیر، فقط یک حقیقت باقی می‌ماند:
+
+تمام این قصه، تمام این عشق و تمام این دنیای کوچک، به خاطر تو ساخته شده است... سما جانم. ❤️
+  </div>
+
+  <button onclick="celebrate()">🎊 دوباره جشن بگیر 🎊</button>
+
+  <footer>با تمام عشق، برای سما ❤️</footer>
+</div>
+
+<script>
+const canvas=document.getElementById("confetti");
+const ctx=canvas.getContext("2d");
+let pieces=[];
+let colors=["#ffd166","#ff6b9a","#8ee3ff","#ffffff","#c9a0ff","#8affc1"];
+
+function resize(){
+ canvas.width=innerWidth;
+ canvas.height=innerHeight;
+}
+addEventListener("resize",resize);
+resize();
+
+function celebrate(){
+ pieces=[];
+ for(let i=0;i<180;i++){
+  pieces.push({
+   x:Math.random()*canvas.width,
+   y:-Math.random()*canvas.height,
+   s:Math.random()*7+4,
+   v:Math.random()*3+2,
+   a:Math.random()*6,
+   c:colors[Math.floor(Math.random()*colors.length)]
+  });
+ }
+}
+
+function animate(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ pieces.forEach(p=>{
+  ctx.save();
+  ctx.translate(p.x,p.y);
+  ctx.rotate(p.a);
+  ctx.fillStyle=p.c;
+  ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*1.5);
+  ctx.restore();
+  p.y+=p.v;
+  p.x+=Math.sin(p.y/25);
+  p.a+=0.04;
+  if(p.y>canvas.height+20){
+   p.y=-15;
+   p.x=Math.random()*canvas.width;
+  }
+ });
+ requestAnimationFrame(animate);
+}
+celebrate();
+animate();
+</script>
+</body>
+  </html>
