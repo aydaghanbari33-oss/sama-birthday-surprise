@@ -159,5 +159,40 @@ function animate(){
 celebrate();
 animate();
 </script>
+<style>
+.party-rain{
+position:fixed;
+top:-40px;
+z-index:9999;
+pointer-events:none;
+animation:partyFall linear forwards;
+}
+@keyframes partyFall{
+to{
+transform:translateY(110vh) rotate(900deg);
+opacity:0;
+}
+}
+</style>
+<script>
+(function(){
+const icons=["🎊","🎉","💛","❤️","✨","🌟","🎀","💖"];
+function rain(){
+for(let i=0;i<45;i++){
+const e=document.createElement("div");
+e.className="party-rain";
+e.textContent=icons[Math.floor(Math.random()*icons.length)];
+e.style.left=Math.random()*100+"vw";
+e.style.fontSize=(18+Math.random()*20)+"px";
+e.style.animationDuration=(4+Math.random()*5)+"s";
+e.style.animationDelay=Math.random()*2+"s";
+document.body.appendChild(e);
+e.addEventListener("animationend",()=>e.remove());
+}
+}
+rain();
+setInterval(rain,3500);
+})();
+</script>
 </body>
   </html>
